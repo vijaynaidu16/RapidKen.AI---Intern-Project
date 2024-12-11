@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: linear-gradient(135deg, #52e5e7 10%, #130cb7 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: #333;
+  color: white;
+  padding: 1em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo {
+  display: inline-block;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fda085;
+}
+
+header .search-bar {
+  float: right;
+}
+
+header input[type="text"] {
+  padding: 0.6em;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+header input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(253, 160, 133, 0.8);
+  border-color: #fda085;
+}
+
+header nav {
+  margin-top: 1em;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin: 0 1em;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+}
+
+header nav ul li a:hover {
+  background: #fda085;
+  color: #333;
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: white;
+}
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1.5em 0;
+  margin-top: auto;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2em;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 2em auto;
+  max-width: 900px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  header .search-bar {
+    float: none;
+    margin-top: 1em;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    display: none;
+  }
+
+  header nav ul.visible {
+    display: flex;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+.employee-form input,
+.employee-form textarea {
+  display: block;
+  width: 100%;
+  margin: 1em 0;
+  padding: 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.employee-form input:focus,
+.employee-form textarea:focus {
+  outline: none;
+  border-color: #fda085;
+  box-shadow: 0 0 10px rgba(253, 160, 133, 0.8);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 1em;
+  text-align: left;
+}
+
+th {
+  background: #fda085;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:hover {
+  background: #fce4d4;
+}
+
+.pagination {
+  margin: 1em 0;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 0.5em;
+  padding: 0.5em 1em;
+  border: none;
+  background: #fda085;
+  color: white;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+  background: #f6d365;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+button {
+  background: linear-gradient(45deg, #1e90ff, #00bfff);
+  color: white;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}

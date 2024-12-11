@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">RapidKen.AI</div>
+        <div class="search-bar">
+          <input type="text" id="search" placeholder="Search employees..." />
+        </div>
+        <div class="hamburger-menu">&#9776;</div>
+        <nav>
+          <ul class="hidden">
+            <li>
+              <a href="employee_registration.html">Employee Registration</a>
+            </li>
+            <li><a href="employee_listing.html">Employee Listing</a></li>
+          </ul>
+        </nav>
+      </header>
+  
+      <div class="container" id="main-content">
+        <!-- Employee registration page -->
+        <form id="employee-form" class="employee-form">
+          <h2>Employee Registration</h2>
+          <label for="name">Name:</label>
+          <input type="text" id="name" required />
+  
+          <label for="position">Position:</label>
+          <input type="text" id="position" required />
+  
+          <label for="about">About:</label>
+          <textarea id="about" required></textarea>
+  
+          <label for="joining_date">Joining Date:</label>
+          <input type="date" id="joining_date" required />
+  
+          <button type="submit">Submit</button>
+        </form>
+  
+        <!-- Employee listing page -->
+        <div id="employee-listing" class="hidden">
+          <h2>Employee Listing</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>About</th>
+                <th>Joining Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Employees will be dynamically added here -->
+            </tbody>
+          </table>
+          <div class="pagination">
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
+          </div>
+        </div>
+      </div>
+  
+      <footer>&copy; 2024 Vijay Pardhu Veera</footer>
+  
+      <script>
+        const employeeForm = document.getElementById("employee-form");
+        const employeeListing = document.getElementById("employee-listing");
+        const tbody = employeeListing.querySelector("tbody");
+  
+        let employees = JSON.parse(localStorage.getItem("employees")) || [];
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        0;
+        employeeForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+  
+          const name = document.getElementById("name").value;
+          const position = document.getElementById("position").value;
+          const about = document.getElementById("about").value;
+          const joiningDate = document.getElementById("joining_date").value;
+  
+          const newEmployee = { name, position, about, joiningDate };
+          employees.push(newEmployee);
+          localStorage.setItem("employees", JSON.stringify(employees));
+  
+          employeeForm.reset();
+          alert("Employee registered successfully!");
+          renderEmployees();
+          toggleView("listing");
+        });
+  
+        function renderEmployees() {
+          tbody.innerHTML = "";
+          const start = (currentPage - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedEmployees = employees.slice(start, end);
+  
+          paginatedEmployees.forEach((employee, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                      <td>${employee.name}</td>
+                      <td>${employee.position}</td>
+                      <td>${employee.about}</td>
+                      <td>${employee.joiningDate}</td>
+                      <td><button onclick="deleteEmployee(${
+                        start + index
+                      })">Delete</button></td>
+                  `;
+            tbody.appendChild(row);
+          });
+        }
+  
+        function deleteEmployee(index) {
+          employees.splice(index, 1);
+          localStorage.setItem("employees", JSON.stringify(employees));
+          renderEmployees();
+        }
+  
+        document.getElementById("prev").addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderEmployees();
+          }
+        });
+  
+        document.getElementById("next").addEventListener("click", () => {
+          if (currentPage < Math.ceil(employees.length / itemsPerPage)) {
+            currentPage++;
+            renderEmployees();
+          }
+        });
+  
+        function toggleView(view) {
+          if (view === "listing") {
+            employeeForm.classList.add("hidden");
+            employeeListing.classList.remove("hidden");
+            renderEmployees();
+          } else {
+            employeeForm.classList.remove("hidden");
+            employeeListing.classList.add("hidden");
+          }
+        }
+  
+        toggleView("registration");
+      </script>
+</body>
+</html>
